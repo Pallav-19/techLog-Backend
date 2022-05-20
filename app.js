@@ -1,9 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/posts.routes.js");
 const CORS_Middleware = require("./middlewares/cross-origin-resource-sharing.js");
-require("dotenv").config();
+const path = require('path')
 
 const app = express();
 
@@ -19,7 +20,7 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(CORS_Middleware);
+app.use("/images",express.static(path.join("public/images")));
 // ----------------------------- BOUNDARY ---------------------------------//
-
 app.use("/api/posts", postRoutes);
 module.exports = app;

@@ -7,16 +7,16 @@ const {
   editPost,
   getPostById,
 } = require("../controllers/post/posts.controller.js");
-
+const imageUpload = require("../middlewares/imageUpload.js");
 
 router.get("/:id", getPostById);
 
-router.post("", addPost);
+router.post("", imageUpload, addPost);
 
 router.get("", getPost);
 
 router.delete("/:id", deletePost);
 
-router.patch("/:id", editPost);
+router.patch("/:id",imageUpload, editPost);
 
 module.exports = router;
