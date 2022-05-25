@@ -2,7 +2,7 @@ const Post = require("../../models/post.js");
 
 const deletePost = (req, res) => {
   const deleteId = req.params.id;
-  Post.deleteOne({ _id: deleteId })
+  Post.deleteOne({ _id: deleteId ,author:req.userData.userId })
     .then((result) => {
       console.log(result);
       res.status(200).json({

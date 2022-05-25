@@ -14,29 +14,32 @@ const login = (req, res, next) => {
       }
       const result = {
         resultUser: foundUser,
-        bcryptAuth:bcrypt.compare(req.body.password, foundUser.password)
+        bcryptAuth: bcrypt.compare(req.body.password, foundUser.password),
       };
-      return result
-      
+      return result;
     })
     .then((result) => {
-       
-      if (!(result.bcryptAuth)) {
+      if (!result.bcryptAuth) {
         return res.status(401).json({
           message: "Auth Failed",
         });
       }
       const token = jwt.sign(
-        { email: result.resultUser.email, userId: result.resultUser._id },
+        {
+          email: result.resultUser.email,
+          userId: result.resultUser._id,
+          username: result.resultUser.username,
+        },
         "BOOST_IS_THE_SECRET_OF_MY_ENERGY",
         { expiresIn: "1h" }
       );
       res.status(200).json({
         message: "auth successfull",
         token: token,
-        expiresIn:3600
+        expiresIn: 3600,
+        userId: result.resultUser._id,
       });
-      console.log(token)
+      console.log(token);
     })
     .catch((err) => {
       console.log(err);

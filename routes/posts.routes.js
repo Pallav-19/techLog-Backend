@@ -15,7 +15,6 @@ router.get("/:id", getPostById);
 router.post("",checkAuth, imageUpload, addPost);
 
 router.get("", getPost);
-
 router.delete("/:id",checkAuth, deletePost);
 
 router.patch("/:id",checkAuth, imageUpload, editPost);

@@ -3,9 +3,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/posts.routes.js");
-const userRoutes = require("./routes/user.routes.js")
+const userRoutes = require("./routes/user.routes.js");
 const CORS_Middleware = require("./middlewares/cross-origin-resource-sharing.js");
-const path = require('path')
+const path = require("path");
 
 const app = express();
 
@@ -21,8 +21,8 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(CORS_Middleware);
-app.use("/images",express.static(path.join("public/images")));
+app.use("/images", express.static(path.join("public/images")));
 // ----------------------------- BOUNDARY ---------------------------------//
 app.use("/api/posts", postRoutes);
-app.use("/api/users",userRoutes);
+app.use("/api/users", userRoutes);
 module.exports = app;

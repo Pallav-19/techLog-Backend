@@ -8,12 +8,13 @@ const editPost = (req, res) => {
 
   const id = req.params.id;
   Post.findOneAndUpdate(
-    { _id: id },
-    { title: req.body.title, content: req.body.content ,image:imagepath}
+    { _id: id, author: req.userData.userId },
+    { title: req.body.title, content: req.body.content, image: imagepath }
   )
     .then((responseData) => {
-      res.json({ message: "post updated successfully" });
-      console.log(responseData);
+      if (responseData.nModified > 0)
+        res.status(200).json({ message: "post updated successfully" });
+      else res.status(401).json({ message: "post update unauthorised" });
     })
     .catch((err) => {
       console.log(`an error ${err} occured`);

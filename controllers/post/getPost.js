@@ -1,4 +1,5 @@
 const Post = require("../../models/post.js");
+const user = require("../../models/user.js");
 
 const getPost = (req, res, next) => {
   const pagesize = +req.query.pagesize;

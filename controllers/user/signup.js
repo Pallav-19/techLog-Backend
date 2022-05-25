@@ -7,6 +7,7 @@ const signup = (req, res, next) => {
       new User({
         email: req.body.email,
         password: hash,
+        username: req.body.username,
       })
 
         .save()
