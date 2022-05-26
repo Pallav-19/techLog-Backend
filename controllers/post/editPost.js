@@ -12,9 +12,9 @@ const editPost = (req, res) => {
     { title: req.body.title, content: req.body.content, image: imagepath }
   )
     .then((responseData) => {
-      if (responseData.nModified > 0)
+      if (responseData.n > 0)
         res.status(200).json({ message: "post updated successfully" });
-      else res.status(401).json({ message: "post update unauthorised" });
+      else{  res.status(401).json({error: {message: "post update unauthorised"} });} 
     })
     .catch((err) => {
       res.status(500).json({

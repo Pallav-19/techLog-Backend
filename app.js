@@ -10,7 +10,11 @@ const path = require("path");
 const app = express();
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(
+    "mongodb+srv://mean-app:" +
+      process.env.MONGO_ATLAS_PW +
+      "@pallav.njiyq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+  )
   .then(() => {
     console.log("mongoose connected ");
   })

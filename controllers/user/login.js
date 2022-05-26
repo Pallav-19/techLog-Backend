@@ -30,7 +30,7 @@ const login =
             userId: fetchedUser._id,
             username: fetchedUser.username,
           },
-          "secret_this_should_be_longer",
+          process.env.JWT_KEY,
           { expiresIn: "1h" }
         );
         res.status(200).json({
