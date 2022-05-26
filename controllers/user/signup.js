@@ -1,5 +1,5 @@
 const User = require("../../models/user.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const signup = (req, res, next) => {
   bcrypt.genSalt(10, function (err, salt) {
