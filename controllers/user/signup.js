@@ -20,7 +20,10 @@ const signup = (req, res, next) => {
         })
         .catch((err) => {
           res.status(500).json({
-            error: err,
+            error: {
+              message: `Invalid auhentication credentials!!! 
+                             Seems like the Email ID is already registered!`,
+            },
           });
           console.log(err);
         });

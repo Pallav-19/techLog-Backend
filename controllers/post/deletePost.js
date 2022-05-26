@@ -2,7 +2,7 @@ const Post = require("../../models/post.js");
 
 const deletePost = (req, res) => {
   const deleteId = req.params.id;
-  Post.deleteOne({ _id: deleteId ,author:req.userData.userId })
+  Post.deleteOne({ _id: deleteId, author: req.userData.userId })
     .then((result) => {
       console.log(result);
       res.status(200).json({
@@ -10,7 +10,11 @@ const deletePost = (req, res) => {
       });
     })
     .catch((err) => {
-      console.log("An error " + err + " occured");
+      res.status(500).json({
+        error: {
+          message: "Something went wrong, could not delete the post",
+        },
+      });
     });
 };
 module.exports = deletePost;

@@ -17,7 +17,11 @@ const editPost = (req, res) => {
       else res.status(401).json({ message: "post update unauthorised" });
     })
     .catch((err) => {
-      console.log(`an error ${err} occured`);
+      res.status(500).json({
+        error: {
+          message: "Could not edit post , Something seems to be wrong!",
+        },
+      });
     });
 };
 module.exports = editPost;

@@ -12,14 +12,21 @@ const getPost = (req, res, next) => {
 
   pageQuery
     .then((documents) => {
-      fetchedpost = documents
+      fetchedpost = documents;
       return Post.count();
     })
     .then((count) => {
       res.status(200).json({
         message: "Posts fetched successfully!",
         posts: fetchedpost,
-        postCount:count,
+        postCount: count,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: {
+          message: "Could not fetch posts!!!",
+        },
       });
     });
 };

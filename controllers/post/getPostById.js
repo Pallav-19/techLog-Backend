@@ -9,7 +9,11 @@ const getPostById = (req, res) => {
       }
     })
     .catch((err) => {
-      console.log(`error occured while fetching post by Id ${err}`);
+      res.status(500).json({
+        error: {
+          message: "Something went wrong",
+        },
+      });
     });
 };
 module.exports = getPostById;

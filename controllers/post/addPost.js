@@ -10,25 +10,34 @@ const addPost = (req, res, next) => {
     author: req.userData.userId,
     authorName: req.userData.username,
   });
-  post.save().then((post) => {
-    User.findOneAndUpdate(
-      { _id: post.author },
-      { $push: { posts: post } }
-    ).then(() => {
-      console.log("post updated successfully in user ID " + post.author);
+  post
+    .save()
+    .then((post) => {
+      User.findOneAndUpdate(
+        { _id: post.author },
+        { $push: { posts: post } }
+      ).then(() => {
+        console.log("post updated successfully in user ID " + post.author);
+      });
+      res.status(201).json({
+        message: `The Post ${post} was saved`,
+        resultId: post._id,
+        createdPost: {
+          id: post._id,
+          title: post.title,
+          content: post.title,
+          image: post.image,
+          author: post.author,
+          authorName: post.authorName,
+        },
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: {
+          message: "Could not add post!!!",
+        },
+      });
     });
-    res.status(201).json({
-      message: `The Post ${post} was saved`,
-      resultId: post._id,
-      createdPost: {
-        id: post._id,
-        title: post.title,
-        content: post.title,
-        image: post.image,
-        author: post.author,
-        authorName: post.authorName,
-      },
-    });
-  });
 };
 module.exports = addPost;
