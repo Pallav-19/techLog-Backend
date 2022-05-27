@@ -17,6 +17,6 @@ router.post("",checkAuth, imageUpload, addPost);
 router.get("", getPost);
 router.delete("/:id",checkAuth, deletePost);
 
-router.patch("/:id",checkAuth, imageUpload, editPost);
+router.put("/:id",checkAuth, imageUpload, editPost);
 
 module.exports = router;

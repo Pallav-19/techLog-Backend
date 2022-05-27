@@ -13,12 +13,17 @@ const addPost = (req, res, next) => {
   post
     .save()
     .then((post) => {
-      User.findOneAndUpdate(
-        { _id: post.author },
-        { $push: { posts: post } }
-      ).then(() => {
-        console.log("post updated successfully in user ID " + post.author);
-      });
+      User.findOneAndUpdate({ _id: post.author }, { $push: { posts: post } })
+        .then(() => {
+          console.log("post updated successfully in user ID " + post.author);
+        })
+        .catch((err) => {
+          res.status(500).json({
+            error: {
+              message: "Could not add post!!!",
+            },
+          });
+        });
       res.status(201).json({
         message: `The Post ${post} was saved`,
         resultId: post._id,
